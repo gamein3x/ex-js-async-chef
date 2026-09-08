@@ -26,8 +26,9 @@ async function getChefBirthday(id) {
 
     const chef = await fetch(`https://dummyjson.com/users/${user}`);
     const chefRes = await chef.json();
+    const birthday = await chefRes.birthDate;
 
-    return console.log(chefRes);
+    return console.log(`Data di nascita dello chef: ${birthday}`);
 }
 
 
