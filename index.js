@@ -20,6 +20,11 @@ Esempio di output:
 > Data di nascita dello chef: 1990-06-15 */
 
 async function getChefBirthday(id) {
+
+    if (typeof id !== "number") {
+        throw new Error("Id errato");
+    };
+
     const recipe = await fetch(`https://dummyjson.com/recipes/${id}`);
     const recipeRes = await recipe.json();
     const user = await recipeRes.userId;
@@ -28,11 +33,14 @@ async function getChefBirthday(id) {
     const chefRes = await chef.json();
     const birthday = await chefRes.birthDate;
 
-    return console.log(`Data di nascita dello chef: ${birthday}`);
+    return birthday;
 }
 
 
-getChefBirthday(2);
+getChefBirthday(2)
+    .then(response => console.log(`Data di nascita dello chef: ${response}`))
+    .catch(error => console.error(error))
+    .finally(console.log(`Codice eseguito`))
 
 
 /* 🎯 Bonus 1
